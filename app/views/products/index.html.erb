@@ -1,0 +1,6 @@
+TEST PRODUCTS
+<%@products.each do |product|%>
+   <h1><%=product.category.name%></h1>
+        <h2><%=product.name%></h2>
+        <div>Quanity to buy <%=text_field_tag("#{product.id}")%></div>
+<%end%>
