@@ -12,7 +12,11 @@ Eshop::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
+
+  post 'carts/add' => 'carts#add'
+
   resources :carts do
+
     resources :products
   end
 

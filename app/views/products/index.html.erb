@@ -1,6 +1,14 @@
 TEST PRODUCTS
+<div id="cart">
+  <table id="shopping_cart"></table>
+</div>
+
 <%@products.each do |product|%>
+    <%=form_tag('/carts/add', method: "post") do%>
    <h1><%=product.category.name%></h1>
         <h2><%=product.name%></h2>
-        <div>Quanity to buy <%=text_field_tag("#{product.id}")%></div>
+        <%= hidden_field(:product,:id, :value => product.id)%>
+        <div>Quanity to buy <%=text_field(:product, :quantity)%></div>
+    <%= submit_tag("Add to Cart") %>
+<% end %>
 <%end%>
