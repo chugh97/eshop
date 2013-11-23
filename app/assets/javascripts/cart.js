@@ -6,6 +6,31 @@
  * To change this template use File | Settings | File Templates.
  */
 $(document).ready(function () {
+
+    var LineItem = function(item){
+        var self = this;
+        self.product_id = item.product_id;
+        self.quantity = item.quantity;
+        self.unit_price = item.unit_price;
+    };
+
+    var CartModel = function(lineitems) {
+        var self = this;
+        self.lineitems = ko.observableArray(lineitems);
+
+        self.addAddLineItem = function(lineitem) {
+            self.lineitems.push({
+                product_id: lineitem.product_id,
+                quantity: lineitem.quantity,
+                unit_price: lineitem.unit_price
+            });
+        };
+
+        self.removeLineItem = function(lineitem) {
+            self.lineitems.remove(lineitem);
+        };
+    };
+
     $.ajax({
         url: "/carts/show",
         async: true,
@@ -13,10 +38,8 @@ $(document).ready(function () {
         success: function(data) {
             var rows = data;
             if (rows && rows !== undefined){
-                $('#shopping_cart').append('<tr><td>Product name</td><td>quantity</td><td>Price</td></tr>');
-                for (var i=0;i< rows.length;i++){
-                    $('#shopping_cart').append('<tr><td>'+ rows[i].product_id +'</td><td>'+ rows[i].quantity +'</td><td>£'+ rows[i].unit_price +'</td></tr>');
-                }
+                var viewModel = new CartModel(rows);
+                ko.applyBindings(viewModel);
             }
         }
     })

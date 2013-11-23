@@ -14,9 +14,9 @@ Eshop::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
 
   post 'carts/add' => 'carts#add'
+  post 'carts/update' => 'carts#update'
 
   resources :carts do
-
     resources :products
   end
 
