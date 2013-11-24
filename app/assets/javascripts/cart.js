@@ -28,6 +28,21 @@ $(document).ready(function () {
 
         self.removeLineItem = function(lineitem) {
             self.lineitems.remove(lineitem);
+            $.ajax({
+                url: "/carts/deletelineitem",
+                type: "POST",
+                data: JSON.stringify(lineitem.product_id),
+                dataType: "json",
+                async: true,
+                contentType: "application/json",
+                success: function(result) {
+                   alert(result.output);
+
+                },
+                error: function (result) {
+                    alert(result.output);
+                }
+            })
         };
     };
 

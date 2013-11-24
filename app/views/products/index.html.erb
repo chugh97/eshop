@@ -13,7 +13,7 @@
       <tbody data-bind='foreach: lineitems'>
       <tr>
         <td><span data-bind='text: product_id, uniqueName: true' /></td>
-        <td><input class='required number' data-bind='value: quantity, uniqueName: true' required digits='true' size='4'/></td>
+        <td><input class='required number' data-bind='value: quantity,attr: { name: product_id }' required digits='true' size='4'/></td>
         <td><span data-bind='text: unit_price, uniqueName: true' /></td>
         <td><a href='#' data-bind='click: $root.removeLineItem'>Delete</a></td>
       </tr>
@@ -24,11 +24,24 @@
 </div>
 
 <%@products.each do |product|%>
-    <%=form_tag('/carts/add', method: "post") do%>
+    <%=form_tag('/carts/add', method: "post", :id => "product_form_#{product.id.to_s}" ) do%>
    <h1><%=product.category.name%></h1>
         <h2><%=product.name%></h2>
         <%= hidden_field(:product,:id, :value => product.id)%>
-        <div>Quanity to buy <%=text_field(:product, :quantity)%></div>
+        <div>Quanity to buy <%=text_field(:product, :quantity, :class => 'digits')%></div>
     <%= submit_tag("Add to Cart") %>
+        <script>
+            var rules = {};
+
+            $("#product_form_<%=product.id.to_s%> input.digits").each(function () {
+                rules[this.id] = { required: true,
+                                   digits:true };
+            });
+
+            $("#product_form_<%=product.id.to_s%>").validate({
+                rules: rules
+            });
+
+        </script>
 <% end %>
 <%end%>

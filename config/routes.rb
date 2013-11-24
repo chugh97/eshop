@@ -15,6 +15,8 @@ Eshop::Application.routes.draw do
 
   post 'carts/add' => 'carts#add'
   post 'carts/update' => 'carts#update'
+  post 'carts/deletelineitem' => 'carts#deletelineitem'
+
 
   resources :carts do
     resources :products

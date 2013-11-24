@@ -41,11 +41,33 @@ class CartsController < ApplicationController
   end
 
   def update
+    @cart =  Cart.where(:session_id => session[:session_id])
+    @cart.each do |lineitem|
+       if params.keys.include?(lineitem[:product_id].to_s)
+         lineitem[:quantity] = params[lineitem[:product_id].to_s]
+         lineitem.save!
+       else
+         lineitem.destroy!
+       end
+    end
+    redirect_to products_path
+  end
 
+  def deletelineitem
+    msg = {}
+    begin
+        lineitem = Cart.where("session_id = ? and product_id = ?", session[:session_id], params['_json']).first
+        lineitem.destroy!
+        msg[:output] =  "Successfully deleted line item."
+      rescue
+        msg[:output] = "An error has occured"
+      ensure
+    end
+    render json: msg
   end
 
   def destroy
-
+    redirect_to products_path
   end
 
   private
