@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122205931) do
+ActiveRecord::Schema.define(version: 20131127220930) do
 
   create_table "carts", force: true do |t|
     t.string   "session_id"
@@ -52,7 +52,8 @@ ActiveRecord::Schema.define(version: 20131122205931) do
 
   create_table "users", force: true do |t|
     t.string "name"
-    t.text   "address"
+    t.string "last_name"
+    t.string "email"
   end
 
 end

@@ -1,3 +1,3 @@
 class ProductPrice < ActiveRecord::Base
-  has_many :products
+  belongs_to :product  #fk is product_id
 end

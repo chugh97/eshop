@@ -1,27 +1,4 @@
-<div id='cart'>
-  <form method='post' action='/carts/update'>
-    <p>You have asked for <span data-bind='text: lineitems().length'>&nbsp;</span> item(s)</p>
-    <table data-bind='visible: lineitems().length > 0'>
-      <thead>
-      <tr>
-        <th>Id</th>
-        <td>Quantity</td>
-        <th>Price</th>
-        <th />
-      </tr>
-      </thead>
-      <tbody data-bind='foreach: lineitems'>
-      <tr>
-        <td><span data-bind='text: product_id, uniqueName: true' /></td>
-        <td><input class='required number' data-bind='value: quantity,attr: { name: product_id }' required digits='true' size='4'/></td>
-        <td><span data-bind='text: unit_price, uniqueName: true' /></td>
-        <td><a href='#' data-bind='click: $root.removeLineItem'>Delete</a></td>
-      </tr>
-      </tbody>
-    </table>
-    <button data-bind='enable: lineitems().length > 0' type='submit'>Update</button>
-  </form>
-</div>
+<%=render 'carts/cart'%>
 
 <%@products.each do |product|%>
     <%=form_tag('/carts/add', method: "post", :id => "product_form_#{product.id.to_s}" ) do%>
