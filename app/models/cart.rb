@@ -1,5 +1,10 @@
 class Cart < ActiveRecord::Base
-  has_many :products
+  belongs_to :product
+
+
+  def as_json(options={ })
+    super({ :include => [:product] }.merge(options))
+  end
 
 
 end

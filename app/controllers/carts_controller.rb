@@ -28,8 +28,8 @@ class CartsController < ApplicationController
   end
 
   def show
-   @cart =  Cart.where(:session_id => session[:session_id])
-   render json: @cart
+   @cart =  Cart.includes(:product).where(:session_id => session[:session_id])
+   render json: @cart.as_json
   end
 
   def create
