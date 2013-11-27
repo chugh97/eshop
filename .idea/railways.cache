@@ -3,6 +3,8 @@
            carts_add POST   /carts/add(.:format)                        carts#add
         carts_update POST   /carts/update(.:format)                     carts#update
 carts_deletelineitem POST   /carts/deletelineitem(.:format)             carts#deletelineitem
+             newuser GET    /newuser(.:format)                          user#new
+         user_create POST   /user/create(.:format)                      user#create
        cart_products GET    /carts/:cart_id/products(.:format)          products#index
                      POST   /carts/:cart_id/products(.:format)          products#create
     new_cart_product GET    /carts/:cart_id/products/new(.:format)      products#new
