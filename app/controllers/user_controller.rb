@@ -4,8 +4,13 @@ class UserController < ApplicationController
   end
 
   def create
-    User.create!(user_params)
-    redirect_to products_path
+    @user = User.create!(user_params)
+    redirect_to action: "registration", user: @user
+  end
+
+  def registration
+    user_id = params[:user]
+    @user = User.find_by(:id => user_id)
   end
 
   private

@@ -19,6 +19,7 @@ Eshop::Application.routes.draw do
 
   get 'newuser' => 'user#new'
   post 'user/create' => 'user#create'
+  get 'user/registration' => 'user#registration'
 
   resources :carts do
     resources :products

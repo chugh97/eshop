@@ -46,16 +46,18 @@ $(document).ready(function () {
         };
     };
 
-    $.ajax({
-        url: "/carts/show",
-        async: true,
-        contentType: "application/json",
-        success: function(data) {
-            var rows = data;
-            if (rows && rows !== undefined){
-                var viewModel = new CartModel(rows);
-                ko.applyBindings(viewModel);
+    if ($("#cart").length){
+        $.ajax({
+            url: "/carts/show",
+            async: true,
+            contentType: "application/json",
+            success: function(data) {
+                var rows = data;
+                if (rows && rows !== undefined){
+                    var viewModel = new CartModel(rows);
+                    ko.applyBindings(viewModel, document.getElementById('cart'));
+                }
             }
-        }
-    })
+        });
+    }
 });

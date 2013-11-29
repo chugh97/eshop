@@ -1,0 +1,85 @@
+
+<script>
+    $(document).ready(function () {
+    var address  = {
+        type: "",
+        line_1: "",
+        line_2: "",
+        town: "",
+        postcode: "",
+        country: ""
+    };
+
+    var phone = {
+        type: "",
+        number: ""
+    };
+
+
+    var user = <%=@user.to_json.html_safe%>;
+    user.addresses = [];
+    user.addresses.push(address);
+    user.phones = [];
+    user.phones.push(phone);
+    var viewModel = new UserModel(user);
+    ko.applyBindings(viewModel, document.getElementById('registration'));
+ });
+</script>
+<div id="registration">
+  <table>
+    <tbody data-bind="foreach: phones">
+    <tr>
+      <td><select data-bind='value: type'>
+        <option>Home</option>
+        <option>Mobile</option>
+      </select>
+      </td>
+      <td><input data-bind='value: number' />
+      </td>
+      <td>
+        <button data-bind='enable: $root.phones().length > 1,click: $root.removePhone' >Delete</button>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+  <button data-bind='click: $root.addPhone,enable: $root.phones().length < 2'>Add number</button>
+  <table>
+    <tbody data-bind="foreach: addresses">
+    <tr>
+      <td>Address Type:</td>
+      <td>
+        <select data-bind='value: type'>
+           <option>Delivery</option>
+           <option>Billing</option>
+         </select>
+      </td>
+    <tr>
+    <tr>
+      <td>Line 1:</td><td><input data-bind='value: line_1' /></td>
+    </tr>
+    <tr>
+      <td>Line 2:</td><td><input data-bind='value: line_2' /></td>
+    </tr>
+    <tr>
+      <td>Town</td><td><input data-bind='value: town' /></td>
+    </tr>
+    <tr>
+      <td>Post Code</td><td><input data-bind='value: postcode' /></td>
+    </tr>
+    <tr>
+      <td>Country</td><td><input data-bind='value: country' /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+        <button data-bind='enable: $root.addresses().length > 1,click: $root.removeAddress'>Delete Address</button>
+    </td>
+    </tr>
+    </tbody>
+
+    <button data-bind='click: $root.addAddress,enable: $root.addresses().length < 2'>Add Address</button>
+  </table>
+  <button data-bind='click: save'>Save to JSON</button>
+  <textarea data-bind='value: lastSavedJson' rows='5' cols='60'> </textarea>
+
+</div>
