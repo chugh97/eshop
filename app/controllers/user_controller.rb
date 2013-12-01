@@ -29,6 +29,9 @@ class UserController < ApplicationController
       @user.phones << Phone.create!(:phone_type_id => phone_type.id, :user_id => @user.id, :phone_number => phone[:number]);
     end
 
+    session[:user_id] = @user.id
+    data = { :success => 'true' }
+    render :json => data, :status => :ok
   end
 
   private

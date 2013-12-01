@@ -21,6 +21,7 @@ Eshop::Application.routes.draw do
   post 'user/create' => 'user#create'
   get 'user/registration' => 'user#registration'
   post 'user/address' => 'user#address'
+  get "/auth/paypal/callback", to: "callback#show"
 
   resources :carts do
     resources :products

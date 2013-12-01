@@ -57,10 +57,11 @@ var UserModel = function(data) {
             async: true,
             contentType: "application/json",
             success: function(result) {
-                alert(result.output);
+                //alert(result.output);
+                location.href = 'http://127.0.0.1:3000/auth/paypal/';
 
             },
-            error: function (result) {
+            error: function (result,x,y) {
                 alert(result.output);
             }
         })
