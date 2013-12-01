@@ -1,5 +1,6 @@
 var UserModel = function(data) {
     var self = this;
+    self.id = ko.observable(data.id);
 
     self.phones = ko.observableArray(ko.utils.arrayMap(data.phones, function(phone) {
         return {
@@ -48,6 +49,22 @@ var UserModel = function(data) {
     self.save = function() {
         //alert(JSON.stringify(ko.toJS(self), null, 2));
         self.lastSavedJson(JSON.stringify(ko.toJS(self), null, 2));
+        $.ajax({
+            url: "/user/address",
+            type: "POST",
+            data: JSON.stringify(ko.toJS(self), null, 2),
+            dataType: "json",
+            async: true,
+            contentType: "application/json",
+            success: function(result) {
+                alert(result.output);
+
+            },
+            error: function (result) {
+                alert(result.output);
+            }
+        })
+
     };
 
     self.lastSavedJson = ko.observable("")

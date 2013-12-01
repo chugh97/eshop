@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127220930) do
+ActiveRecord::Schema.define(version: 20131201175605) do
+
+  create_table "address_types", force: true do |t|
+    t.string "description"
+  end
+
+  create_table "addresses", force: true do |t|
+    t.integer "address_type_id"
+    t.string  "line_1"
+    t.string  "line_2"
+    t.string  "town"
+    t.string  "postcode"
+    t.string  "country"
+    t.integer "user_id"
+  end
 
   create_table "carts", force: true do |t|
     t.string   "session_id"
@@ -34,6 +48,16 @@ ActiveRecord::Schema.define(version: 20131127220930) do
     t.decimal  "unit_price", precision: 10, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "phone_types", force: true do |t|
+    t.string "description"
+  end
+
+  create_table "phones", force: true do |t|
+    t.integer "phone_type_id"
+    t.string  "phone_number"
+    t.integer "user_id"
   end
 
   create_table "product_prices", force: true do |t|

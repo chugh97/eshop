@@ -26,6 +26,7 @@
  });
 </script>
 <div id="registration">
+  <form method='post' action='/user/address'>
   <table>
     <tbody data-bind="foreach: phones">
     <tr>
@@ -79,7 +80,8 @@
 
     <button data-bind='click: $root.addAddress,enable: $root.addresses().length < 2'>Add Address</button>
   </table>
-  <button data-bind='click: save'>Save to JSON</button>
-  <textarea data-bind='value: lastSavedJson' rows='5' cols='60'> </textarea>
+  <button data-bind='click: save' type="submit">Save to JSON</button>
 
+  <textarea data-bind='value: lastSavedJson' rows='5' cols='60'> </textarea>
+  </form>
 </div>

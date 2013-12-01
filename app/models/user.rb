@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :orders
-  #attr_accessible :name,:last_name,:email
+  has_many :addresses
+  has_many :phones
 
 end
