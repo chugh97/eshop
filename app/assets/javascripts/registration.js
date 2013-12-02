@@ -58,7 +58,7 @@ var UserModel = function(data) {
             contentType: "application/json",
             success: function(result) {
                 //alert(result.output);
-                location.href = 'http://127.0.0.1:3000/auth/paypal/';
+                //location.href = 'http://127.0.0.1:3000/auth/paypal/';
 
             },
             error: function (result,x,y) {

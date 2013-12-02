@@ -1,0 +1,6 @@
+<form method="post" action="/orders/completeorder">
+<%= hidden_field(:order, :express_token,:value => @order.express_token)%>
+<p>Name: <%= @order.inspect %></p>
+<p>TODO Display order confirmation details</p>
+<%= submit_tag("Complete Order") %>
+</form>

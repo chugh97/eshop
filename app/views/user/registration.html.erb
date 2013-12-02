@@ -84,4 +84,12 @@
 
   <textarea data-bind='value: lastSavedJson' rows='5' cols='60'> </textarea>
   </form>
+
+  <p>
+    <%= link_to "Continue Shopping", products_path %> |
+    <%= link_to "Checkout", orders_new_path %>
+  </p>
+  <p>
+    <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), orders_express_path %>
+  </p>
 </div>

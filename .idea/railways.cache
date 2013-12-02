@@ -5,6 +5,9 @@
 carts_deletelineitem POST   /carts/deletelineitem(.:format)             carts#deletelineitem
              newuser GET    /newuser(.:format)                          user#new
          user_create POST   /user/create(.:format)                      user#create
+   user_registration GET    /user/registration(.:format)                user#registration
+        user_address POST   /user/address(.:format)                     user#address
+auth_paypal_callback GET    /auth/paypal/callback(.:format)             callback#show
        cart_products GET    /carts/:cart_id/products(.:format)          products#index
                      POST   /carts/:cart_id/products(.:format)          products#create
     new_cart_product GET    /carts/:cart_id/products/new(.:format)      products#new

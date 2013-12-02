@@ -1,3 +1,5 @@
+
+
 Eshop::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -21,6 +23,17 @@ Eshop::Application.configure do
 
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+        :login => "shaleen.chugh-facilitator_api1.gmail.com",
+        :password => "1385923724",
+        :signature => "An5ns1Kso7MWUdW4ErQKJJJ4qi4-AEuIRLD51k5XuinXYb6IiM.ayFEh"
+    }
+    ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+  end
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
