@@ -25,26 +25,33 @@
     ko.applyBindings(viewModel, document.getElementById('registration'));
  });
 </script>
+<div class="row">
 <div id="registration">
   <form method='post' action='/user/address'>
-  <table>
+    <button data-bind='click: $root.addPhone,enable: $root.phones().length < 2' class='btn btn-xs btn-success'>Add Phone number</button><br/>
+   <table>
     <tbody data-bind="foreach: phones">
     <tr>
-      <td><select data-bind='value: type'>
+      <td>
+      <select data-bind='value: type'>
         <option>Home</option>
         <option>Mobile</option>
       </select>
       </td>
-      <td><input data-bind='value: number' />
+      <td>
+        <input data-bind='value: number' class="form-control" placeholder="Number" />
       </td>
       <td>
-        <button data-bind='enable: $root.phones().length > 1,click: $root.removePhone' >Delete</button>
-        </td>
+        <button data-bind='enable: $root.phones().length > 1,click: $root.removePhone' class="btn btn-xs btn-danger">Delete Phone</button>
+      </td>
     </tr>
     </tbody>
   </table>
-  <button data-bind='click: $root.addPhone,enable: $root.phones().length < 2'>Add number</button>
-  <table>
+    <br/>
+
+    <button data-bind='click: $root.addAddress,enable: $root.addresses().length < 2' class='btn btn-xs btn-success'>Add Address</button>
+
+    <table>
     <tbody data-bind="foreach: addresses">
     <tr>
       <td>Address Type:</td>
@@ -56,29 +63,27 @@
       </td>
     <tr>
     <tr>
-      <td>Line 1:</td><td><input data-bind='value: line_1' /></td>
+      <td>Line 1:</td><td><input data-bind='value: line_1'  class="form-control" placeholder="Line 1"/></td>
     </tr>
     <tr>
-      <td>Line 2:</td><td><input data-bind='value: line_2' /></td>
+      <td>Line 2:</td><td><input data-bind='value: line_2'  class="form-control" placeholder="Line 2"/></td>
     </tr>
     <tr>
-      <td>Town</td><td><input data-bind='value: town' /></td>
+      <td>Town</td><td><input data-bind='value: town' class="form-control" placeholder="Town"/></td>
     </tr>
     <tr>
-      <td>Post Code</td><td><input data-bind='value: postcode' /></td>
+      <td>Post Code</td><td><input data-bind='value: postcode' class="form-control" placeholder="Postcode"/></td>
     </tr>
     <tr>
-      <td>Country</td><td><input data-bind='value: country' /></td>
+      <td>Country</td><td><input data-bind='value: country' class="form-control" placeholder="Country" /></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
       <td>
-        <button data-bind='enable: $root.addresses().length > 1,click: $root.removeAddress'>Delete Address</button>
+        <button data-bind='enable: $root.addresses().length > 1,click: $root.removeAddress' class='btn btn-xs btn-danger'>Delete Address</button>
     </td>
     </tr>
     </tbody>
-
-    <button data-bind='click: $root.addAddress,enable: $root.addresses().length < 2'>Add Address</button>
   </table>
   <button data-bind='click: save' type="submit">Save to JSON</button>
 
@@ -92,4 +97,5 @@
   <p>
     <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), orders_express_path %>
   </p>
+</div>
 </div>

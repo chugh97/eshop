@@ -1,25 +1,37 @@
-
-<%=render 'carts/cart'%>
-
-<%@products.each do |product|%>
+<div class="row">
+  <div class="col-md-8">
+  <%@products.each do |product|%>
+    <div class="col-md-6">
+      <div class="panel panel-primary">
     <%=form_tag('/carts/add', method: "post", :id => "product_form_#{product.id.to_s}" ) do%>
-   <h1><%=product.category.name%></h1>
-        <h2><%=product.name%></h2>
-        <%= hidden_field(:product,:id, :value => product.id)%>
-        <div>Quanity to buy <%=text_field(:product, :quantity, :class => 'digits')%></div>
-    <%= submit_tag("Add to Cart") %>
-        <script>
-            var rules = {};
+          <div class="panel-heading">
+            <h3 class="panel-title"><%=product.category.name%></h3>
+          </div>
+          <div class="panel-body">
+            <%=product.name%>
+            <%= hidden_field(:product,:id, :value => product.id)%>
+            <div>Quanity to buy <%=text_field(:product, :quantity, :class => 'digits')%></div>
+            <%= submit_tag("Add to Cart",:class => "btn btn-xs btn-primary") %>
+            <script>
+                var rules = {};
 
-            $("#product_form_<%=product.id.to_s%> input.digits").each(function () {
-                rules[this.id] = { required: true,
-                                   digits:true };
-            });
+                $("#product_form_<%=product.id.to_s%> input.digits").each(function () {
+                    rules[this.id] = { required: true,
+                        digits:true };
+                });
 
-            $("#product_form_<%=product.id.to_s%>").validate({
-                rules: rules
-            });
+                $("#product_form_<%=product.id.to_s%>").validate({
+                    rules: rules
+                });
 
-        </script>
+            </script>
+          </div>
 <% end %>
+      </div>
+    </div>
 <%end%>
+  </div>
+  <div class="col-md-4">
+    <%=render 'carts/cart'%>
+  </div>
+</div>
