@@ -10,5 +10,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new(:express_token => params[:token])
+    reset_session
   end
 end
