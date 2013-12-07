@@ -5,17 +5,20 @@
  * Time: 22:24
  * To change this template use File | Settings | File Templates.
  */
-$(document).ready(function () {
+function formatCurrency(value) {
+    return "£" + value.toFixed(2);
+}
 
-    var LineItem = function(item){
-        var self = this;
-        self.product_id = item.product_id;
-        self.quantity = item.quantity;
-        self.unit_price = item.unit_price;
-    };
+
+$(document).ready(function () {
 
     var CartModel = function(lineitems) {
         var self = this;
+
+        for(var i=0;i<lineitems.length;i++){
+            lineitems[i].sub_total = lineitems[i].unit_price * lineitems[i].quantity
+        }
+
         self.lineitems = ko.observableArray(lineitems);
 
         self.addAddLineItem = function(lineitem) {
@@ -23,6 +26,7 @@ $(document).ready(function () {
                 product_id: lineitem.product_id,
                 quantity: lineitem.quantity,
                 unit_price: lineitem.unit_price
+
             });
         };
 
@@ -44,6 +48,12 @@ $(document).ready(function () {
                 }
             })
         };
+
+        self.grandTotal = ko.computed(function() {
+            var total = 0;
+            $.each(self.lineitems(), function() { total += this.sub_total })
+            return total;
+        });
     };
 
     if ($("#cart").length){

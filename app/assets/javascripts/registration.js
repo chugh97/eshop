@@ -59,7 +59,7 @@ var UserModel = function(data) {
             success: function(result) {
                 //alert(result.output);
                 //location.href = 'http://127.0.0.1:3000/auth/paypal/';
-
+                location.href = '/orders/express'
             },
             error: function (result,x,y) {
                 alert(result.output);
