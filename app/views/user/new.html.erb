@@ -1,6 +1,19 @@
 <div class="container-fluid">
 <div class="row-fluid">
-<div class="span4">
+
+<div class="col-md-6">
+  <%=form_tag('/user/existing', method: "post", :id => "user_existing", :class=> "form-signin") do%>
+      <h2 class="form-signin-heading">Existing User</h2>
+
+      <input  type="text" id="user[email]" name="user[email]" class="validate form-control" placeholder="Email"/>   <br/>
+
+      <input  type="password" id="user[password]" name="user[password]" class="validate form-control" placeholder="Password"/>   <br>
+
+      <%= submit_tag("Sign in", :class=> "btn btn-lg btn-primary btn-block") %>
+
+  <% end %>
+</div>
+<div class="col-md-6">
 
   <%=form_tag('/user/create', method: "post", :id => "user_registration", :class=> "form-signin") do%>
       <h2 class="form-signin-heading">New Signup</h2>
