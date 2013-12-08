@@ -31,6 +31,26 @@ var UserModel = function(data) {
         self.phones.remove(phone);
     };
 
+    self.addressesAreSame = ko.observable();
+
+    self.addressesAreSame.subscribe(function(newValue){
+        if(newValue === true){
+            if (self.addresses().length > 1){
+                self.removeAddress(self.addresses()[1]);
+                var address_to_add = self.addresses()[0];
+                address_to_add.type = 'Billing';
+                self.addAddress(address_to_add);
+            }
+        }
+        else{
+            if (self.addresses().length > 1){
+                self.removeAddress(self.addresses()[1]);
+                var address_to_add = { type: 'Billing' , line_1: "", line_2: "", town : "", postcode: "", country: ""};
+                self.addAddress(address_to_add);
+            }
+        }
+    });
+
     self.addAddress = function(address) {
         self.addresses.push({
             type: address.type,
@@ -44,6 +64,9 @@ var UserModel = function(data) {
 
     self.removeAddress = function(address) {
         self.addresses.remove(address);
+        if (self.addresses().length === 1){
+            self.addressesAreSame = false;
+        }
     };
 
     self.save = function() {

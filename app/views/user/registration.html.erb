@@ -50,7 +50,7 @@
     <br/>
 
     <button data-bind='click: $root.addAddress,enable: $root.addresses().length < 2' class='btn btn-xs btn-success'>Add Address</button>
-
+    <input type="checkbox" data-bind="checked: addressesAreSame, enable: $root.addresses().length > 1" />Billing same as delivery address
     <table>
     <tbody data-bind="foreach: addresses">
     <tr>
