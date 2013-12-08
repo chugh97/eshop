@@ -8,7 +8,7 @@ class CartsController < ApplicationController
 
   def add
     if !products_in_existing_cart.any?
-      product_price = get_product_price()
+      product_price = get_product_price
       Cart.create!(:session_id => session[:session_id], :product_id => params[:product][:id], :quantity => params[:product][:quantity], :unit_price => product_price[:price])
     else
       existing_line_item = products_in_existing_cart.first

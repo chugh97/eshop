@@ -8,11 +8,15 @@
             <h3 class="panel-title"><%=product.category.name%></h3>
           </div>
           <div class="panel-body">
-            <%=product.name%>
+            <%=product.name%> <br/>
+            Price: <span id="product_price_<%=product.id.to_s%>"></span>
+
             <%= hidden_field(:product,:id, :value => product.id)%>
             <div>Quanity to buy <%=text_field(:product, :quantity, :class => 'digits')%></div>
             <%= submit_tag("Add to Cart",:class => "btn btn-xs btn-primary") %>
             <script>
+                $("#product_price_<%=product.id.to_s%>").text(formatCurrency(<%=product.get_product_price[:price]%>));
+
                 var rules = {};
 
                 $("#product_form_<%=product.id.to_s%> input.digits").each(function () {

@@ -15,3 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+
+function formatCurrency(value) {
+    return "£" + value.toFixed(2);
+}
