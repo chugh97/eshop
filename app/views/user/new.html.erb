@@ -1,6 +1,8 @@
 <div class="container-fluid">
 <div class="row-fluid">
-
+  <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
 <div class="col-md-6">
   <%=form_tag('/user/existing', method: "post", :id => "user_existing", :class=> "form-signin") do%>
       <h2 class="form-signin-heading">Existing User</h2>
@@ -26,7 +28,11 @@
 
        <input  type="text" id="user[confirmation_email]" name="user[confirmation_email]" class="validate form-control" placeholder="Confirm email"/>   <br>
 
-   <%= submit_tag("Sign Up", :class=> "btn btn-lg btn-primary btn-block") %>
+      <input  type="password" id="user[password]" name="user[password]" class="validate form-control" placeholder="Password"/>   <br>
+
+      <input  type="password" id="user[confirmation_password]" name="user[confirmation_password]" class="validate form-control" placeholder="Password"/>   <br>
+
+      <%= submit_tag("Sign Up", :class=> "btn btn-lg btn-primary btn-block") %>
 
 <% end %>
 </div>

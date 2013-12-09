@@ -2,13 +2,20 @@ class UserController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => [:address]
 
+
   def new
 
   end
 
   def create
-    @user = User.create!(user_params)
-    redirect_to action: "registration", user: @user
+    @user = User.new
+    @user.name = user_params[:name]
+    @user.last_name = user_params[:last_name]
+    @user.encrypted_password = user_params[:password]
+    @user.email = user_params[:email]
+    @user.save!
+
+    redirect_to new_invitation_path(:user => @user)
   end
 
   def registration
@@ -37,6 +44,6 @@ class UserController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name,:last_name,:email)
+    params.require(:user).permit(:name,:last_name,:email,:password)
   end
 end

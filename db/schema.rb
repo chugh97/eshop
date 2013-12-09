@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202221655) do
+ActiveRecord::Schema.define(version: 20131209231704) do
 
   create_table "address_types", force: true do |t|
     t.string "description"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20131202221655) do
 
   create_table "categories", force: true do |t|
     t.string "name"
+  end
+
+  create_table "invitations", force: true do |t|
+    t.string   "invite_code"
+    t.datetime "issued_at"
+    t.string   "email"
   end
 
   create_table "order_transactions", force: true do |t|
@@ -88,9 +94,11 @@ ActiveRecord::Schema.define(version: 20131202221655) do
   end
 
   create_table "users", force: true do |t|
-    t.string "name"
-    t.string "last_name"
-    t.string "email"
+    t.string  "name"
+    t.string  "last_name"
+    t.string  "email"
+    t.boolean "is_confirmed"
+    t.string  "encrypted_password"
   end
 
 end

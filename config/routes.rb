@@ -23,6 +23,14 @@ Eshop::Application.routes.draw do
   post 'user/address' => 'user#address'
   get "/auth/paypal/callback", to: "callback#show"
 
+  resources :invitation do
+    member do
+      get :confirm
+    end
+  end
+
+
+
   #resources :orders, :new => { :express => :get }
   get 'orders/express', to: 'orders#express'
   get 'orders/new', to: 'orders#new'
