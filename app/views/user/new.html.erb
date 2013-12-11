@@ -4,7 +4,7 @@
       <div class="notice"><%= flash[:notice] %></div>
   <% end %>
 <div class="col-md-6">
-  <%=form_tag('/user/existing', method: "post", :id => "user_existing", :class=> "form-signin") do%>
+  <%=form_tag('/login', method: "post", :id => "user_existing", :class=> "form-signin") do%>
       <h2 class="form-signin-heading">Existing User</h2>
 
       <input  type="text" id="user[email]" name="user[email]" class="validate form-control" placeholder="Email"/>   <br/>

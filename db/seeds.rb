@@ -15,4 +15,11 @@ ProductPrice.create!(product: p1, price: 1.99, effective_start_date: 1.day.ago)
 ProductPrice.create!(product: p2, price: 2.69, effective_start_date: 1.day.ago)
 ProductPrice.create!(product: p3, price: 14.99, effective_start_date: 1.day.ago)
 
+AddressType.create!(description: "Delivery")
+AddressType.create!(description: "Billing")
+
+PhoneType.create!(description: "Home")
+PhoneType.create!(description: "Mobile")
+
+
 

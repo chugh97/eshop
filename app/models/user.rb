@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   private
   def hash_password
-    self.encrypted_password = Digest::SHA1.hexdigest(self.encrypted_password)
+    self.encrypted_password = Digest::SHA1.hexdigest(self.encrypted_password) if new_record?
   end
 
 end

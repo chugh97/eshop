@@ -20,7 +20,7 @@ class CartsController < ApplicationController
   end
 
   def products_in_existing_cart
-    Cart.where("session_id = ? AND product_id = ?", session[:session_id], params[:product][:id])
+    Cart.where("session_id = ? AND product_id = ? and purchased_at IS NULL", session[:session_id], params[:product][:id])
   end
 
   def index

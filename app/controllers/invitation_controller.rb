@@ -16,8 +16,8 @@ class InvitationController < ApplicationController
   def confirm
     invite = Invitation.find_by_invite_code(params[:id])
     user = User.find_by_email(invite.email)
-    user.is_confirmed = true
-    user.save
+    user.update_attribute :is_confirmed, true
+
     flash[:notice] = "Your email is confirmed. Please Sign in....."
     redirect_to newuser_path
   end

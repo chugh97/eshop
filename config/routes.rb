@@ -17,10 +17,12 @@ Eshop::Application.routes.draw do
   post 'carts/update' => 'carts#update'
   post 'carts/deletelineitem' => 'carts#deletelineitem'
 
-  get 'newuser' => 'user#new'
+  get '/newuser' => 'user#new'
   post 'user/create' => 'user#create'
   get 'user/registration' => 'user#registration'
   post 'user/address' => 'user#address'
+  post '/login' => 'user#login', :as => 'login'
+  get '/logout' => 'user#logout', :as => 'logout'
   get "/auth/paypal/callback", to: "callback#show"
 
   resources :invitation do

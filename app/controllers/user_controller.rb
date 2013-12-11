@@ -1,7 +1,9 @@
+require 'digest/sha1'
+
 class UserController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => [:address]
-
+  before_filter :redirect_if_logged_in, :only => [:new, :create,  :login]
 
   def new
 
@@ -23,6 +25,16 @@ class UserController < ApplicationController
     @user = User.find_by(:id => user_id)
   end
 
+  def login
+    @user = User.where("email = ? and encrypted_password=? and is_confirmed = true", login_params[:email], Digest::SHA1.hexdigest(login_params[:password]))
+    if @user.first
+      session[:current_user] = @user.first.id
+      redirect_to user_registration_path(:user => @user.first)
+    else
+      render :new
+    end
+  end
+
   def address
     @user = User.find_by(:id => params[:id]);
 
@@ -36,14 +48,28 @@ class UserController < ApplicationController
       @user.phones << Phone.create!(:phone_type_id => phone_type.id, :user_id => @user.id, :phone_number => phone[:number]);
     end
 
-    session[:user_id] = @user.id
     data = { :success => 'true' }
     render :json => data, :status => :ok
   end
 
+  def logout
+    reset_session
+    redirect_to root_path
+  end
+
   private
+
+  def redirect_if_logged_in
+    if !session[:current_user].nil?
+      redirect_to user_registration_path(:user => session[:current_user])
+    end
+  end
 
   def user_params
     params.require(:user).permit(:name,:last_name,:email,:password)
+  end
+
+  def login_params
+    params.require(:user).permit(:email,:password)
   end
 end

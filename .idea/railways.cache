@@ -8,6 +8,15 @@ carts_deletelineitem POST   /carts/deletelineitem(.:format)             carts#de
    user_registration GET    /user/registration(.:format)                user#registration
         user_address POST   /user/address(.:format)                     user#address
 auth_paypal_callback GET    /auth/paypal/callback(.:format)             callback#show
+  confirm_invitation GET    /invitation/:id/confirm(.:format)           invitation#confirm
+    invitation_index GET    /invitation(.:format)                       invitation#index
+                     POST   /invitation(.:format)                       invitation#create
+      new_invitation GET    /invitation/new(.:format)                   invitation#new
+     edit_invitation GET    /invitation/:id/edit(.:format)              invitation#edit
+          invitation GET    /invitation/:id(.:format)                   invitation#show
+                     PATCH  /invitation/:id(.:format)                   invitation#update
+                     PUT    /invitation/:id(.:format)                   invitation#update
+                     DELETE /invitation/:id(.:format)                   invitation#destroy
       orders_express GET    /orders/express(.:format)                   orders#express
           orders_new GET    /orders/new(.:format)                       orders#new
        cart_products GET    /carts/:cart_id/products(.:format)          products#index
