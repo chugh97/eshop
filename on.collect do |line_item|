@@ -1,0 +1,18 @@
+
+[1mFrom:[0m /home/shaleenchugh/development/eshop/app/models/cart.rb @ line 10 Cart.items_in_cart:
+
+     [1;34m8[0m:   [32mdef[0m [1;36mself[0m.[1;34mitems_in_cart[0m(session_id)
+     [1;34m9[0m:     cart_json = [1;36mself[0m.where([31m[1;31m'[0m[31msession_id = ?[1;31m'[0m[31m[0m, session_id).as_json
+ => [1;34m10[0m: binding.pry
+    [1;34m11[0m:     cart_json.collect [32mdo[0m |line_item|
+    [1;34m12[0m:       product = line_item[[31m[1;31m'[0m[31mproduct[1;31m'[0m[31m[0m]
+    [1;34m13[0m:       {
+    [1;34m14[0m:           [33m:name[0m => product[[31m[1;31m'[0m[31mname[1;31m'[0m[31m[0m],
+    [1;34m15[0m:           [33m:number[0m => product[[31m[1;31m'[0m[31mdescription[1;31m'[0m[31m[0m],
+    [1;34m16[0m:           [33m:quantity[0m => line_item[[31m[1;31m'[0m[31mquantity[1;31m'[0m[31m[0m],
+    [1;34m17[0m:           [33m:amount[0m => line_item[[31m[1;31m'[0m[31munit_price[1;31m'[0m[31m[0m] * [1;34m100[0m
+    [1;34m18[0m:       }
+    [1;34m19[0m:     [32mend[0m
+    [1;34m20[0m: 
+    [1;34m21[0m:   [32mend[0m
+
