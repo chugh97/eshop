@@ -47,6 +47,10 @@ group :development, :test do
   gem 'shoulda'
 end
 
+group :coverage do
+  gem 'simplecov', :require => false
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
