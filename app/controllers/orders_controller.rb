@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   def express
     total = Cart.total(session[:session_id])
     items = Cart.items_in_cart(session[:session_id])
-    response = EXPRESS_GATEWAY.setup_purchase(total * 100,
+    response = EXPRESS_GATEWAY.setup_purchase((total * 100).to_i,
                                               :ip                => request.remote_ip,
                                               :return_url        => orders_new_url,
                                               :cancel_return_url => products_url,

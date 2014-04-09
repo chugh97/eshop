@@ -16,6 +16,13 @@
 //= require_tree .
 //= require bootstrap
 
+
+function IsNumeric(input){
+  var RE = /^-{0,1}\d*\.{0,1}\d+$/;
+  return (RE.test(input));
+}
+
 function formatCurrency(value) {
-    return "£" + value.toFixed(2);
+   if (IsNumeric(value))
+     return "£" + parseFloat(value).toFixed(2);
 }

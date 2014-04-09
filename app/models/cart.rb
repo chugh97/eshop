@@ -13,7 +13,7 @@ class Cart < ActiveRecord::Base
           :name => product['name'],
           :description => product['description'],
           :quantity => line_item['quantity'],
-          :amount => line_item['unit_price'] *  line_item['quantity']
+          :amount => ((line_item['unit_price'] *  line_item['quantity']) * 100).to_i
       }
     end
 

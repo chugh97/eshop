@@ -18,7 +18,7 @@
         <td><span data-bind='text: product_id, uniqueName: true' /></td>
         <td><span data-bind='text: product.name' /></td>
         <td><input class='required number' data-bind='value: quantity,attr: { name: product_id }' required digits='true' size='4'/></td>
-        <td><span data-bind='text: formatCurrency(unit_price), uniqueName: true' /></td>
+        <td><span data-bind='text: formatCurrency(unit_price)' /></td>
         <td><span data-bind='text: formatCurrency(sub_total)' /></td>
         <td><a href='#' data-bind='click: $root.removeLineItem'>Delete</a></td>
       </tr>
