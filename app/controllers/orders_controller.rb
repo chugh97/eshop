@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:completeorder]
+
   def express
     total = Cart.total(session[:session_id])
     items = Cart.items_in_cart(session[:session_id])
@@ -11,7 +13,6 @@ class OrdersController < ApplicationController
                                               brand_name: 'e-Shop', #The name of the company
                                               allow_guest_checkout: 'true',   #payment with credit card for non PayPal users
         items: items #array of hashes, amount is a price in cents
-
     )
 
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
@@ -19,6 +20,26 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new(:express_token => params[:token])
+  end
+
+  def completeorder
+    @order = Order.new(:express_token =>  params[:order][:express_token], :express_payer_id => params[:order][:express_payer_id], :session_id => session[:session_id])
+    @order.save
+    order_number = generate_order_number(@order.id)
+    @order =  Order.find_by_id(@order.id)
+    @order.order_number = order_number
+    @order.save
+    set_purchased_at
     reset_session
+    @order
+  end
+
+  private
+  def set_purchased_at
+    Cart.update_all("purchased_at = '#{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}'", "session_id = '#{session[:session_id]}'")
+  end
+
+  def generate_order_number(order_no)
+    "ESHOP-%.6d" % order_no
   end
 end

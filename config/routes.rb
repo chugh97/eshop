@@ -36,6 +36,7 @@ Eshop::Application.routes.draw do
   #resources :orders, :new => { :express => :get }
   get 'orders/express', to: 'orders#express'
   get 'orders/new', to: 'orders#new'
+  post 'orders/completeorder' => 'orders#completeorder'
 
   resources :carts do
     resources :products

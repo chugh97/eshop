@@ -1,8 +1,9 @@
 <div class="container-fluid">
-<form method="post" action="/orders/completeorder">
-<%= hidden_field(:order, :express_token,:value => @order.express_token)%>
-<p>Name: <%= @order.inspect %></p>
-<p>TODO Display order confirmation details</p>
-<%= submit_tag("Complete Order", :class => 'btn btn-xs btn-success') %>
-</form>
+<%= form_for @order, as: :post, url: '/orders/completeorder', method: :post do |f| %>
+  <%= hidden_field(:order,:express_payer_id, :value => @order.express_payer_id)%>
+  <%= hidden_field(:order,:express_token, :value => @order.express_token)%>
+  <p>Name: <%= @order.inspect %></p>
+  <p>TODO Display order confirmation details</p>
+  <%= submit_tag("Complete Order", :class => 'btn btn-xs btn-success') %>
+<%end%>
 </div>
