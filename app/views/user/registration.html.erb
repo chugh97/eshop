@@ -25,6 +25,15 @@
     ko.applyBindings(viewModel, document.getElementById('registration'));
  });
 </script>
+
+<div class=row">
+<% flash.each do |type, message| %>
+  <div class="alert <%= bootstrap_class_for(type) %> fade in">
+    <button class="close" data-dismiss="alert">×</button>
+    <%= message %>
+  </div>
+<% end %>
+</div>
 <div class="row">
 <div id="registration">
   <form method='post' action='/user/address'>

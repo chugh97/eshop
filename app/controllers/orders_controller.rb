@@ -15,7 +15,12 @@ class OrdersController < ApplicationController
         items: items #array of hashes, amount is a price in cents
     )
 
-    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+    if response.params["ack"] == "Success"
+      redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+    else
+      flash[:error] = response.params["message"]
+      redirect_to request.referer and return
+    end
   end
 
   def new

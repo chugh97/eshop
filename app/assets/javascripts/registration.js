@@ -70,7 +70,6 @@ var UserModel = function(data) {
     };
 
     self.save = function() {
-        //alert(JSON.stringify(ko.toJS(self), null, 2));
         self.lastSavedJson(JSON.stringify(ko.toJS(self), null, 2));
         $.ajax({
             url: "/user/address",
@@ -80,9 +79,8 @@ var UserModel = function(data) {
             async: true,
             contentType: "application/json",
             success: function(result) {
-                //alert(result.output);
-                //location.href = 'http://127.0.0.1:3000/auth/paypal/';
-                location.href = '/orders/express'
+                if (result.success === true)
+                 location.href = '/orders/express'
             },
             error: function (result,x,y) {
                 alert(result.output);

@@ -36,20 +36,38 @@ class UserController < ApplicationController
   end
 
   def address
+    address_not_entered = phones_not_entered = false
     @user = User.find_by(:id => params[:id]);
 
-    params[:addresses].each do |address|
-      address_type = AddressType.find_by_description(address[:type])
-      @user.addresses << Address.create!(:address_type_id => address_type.id, :user_id => @user.id, :line_1 => address[:line_1], :line_2 => address[:line_2], :town => address[:town], :postcode => address[:postcode], :country => address[:country]);
+    if @user
+      if @user.addresses.size == 0
+        address_not_entered = true
+        params[:addresses].each do |address|
+          address_type = AddressType.find_by_description(address[:type])
+          @user.addresses << Address.create!(:address_type_id => address_type.id, :user_id => @user.id, :line_1 => address[:line_1], :line_2 => address[:line_2], :town => address[:town], :postcode => address[:postcode], :country => address[:country]);
+        end
+      end
+
+      if @user.phones.size == 0
+        phones_not_entered = true
+        params[:phones].each do |phone|
+          phone_type = PhoneType.find_by_description(phone[:type])
+          @user.phones << Phone.create!(:phone_type_id => phone_type.id, :user_id => @user.id, :phone_number => phone[:number]);
+        end
+      end
+
+      if (phones_not_entered && address_not_entered)
+        data = { :success => 'true' }
+        render :json => data, :status => :ok
+      else
+        data = { :success => 'false' }
+        render :json => data, :status => :ok
+      end
+    else
+      data = { :success => 'false' }
+      render :json => data, :status => :ok
     end
 
-    params[:phones].each do |phone|
-      phone_type = PhoneType.find_by_description(phone[:type])
-      @user.phones << Phone.create!(:phone_type_id => phone_type.id, :user_id => @user.id, :phone_number => phone[:number]);
-    end
-
-    data = { :success => 'true' }
-    render :json => data, :status => :ok
   end
 
   def logout
