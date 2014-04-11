@@ -1,4 +1,5 @@
 class Administration::ProductsController < ApplicationController
+
   def index
     @products = Product.all
     render 'administration/index'
@@ -6,7 +7,6 @@ class Administration::ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by_id(params[:id])
-    @categories = Category.all
     render 'administration/edit'
   end
 
@@ -20,9 +20,13 @@ class Administration::ProductsController < ApplicationController
     if @product.update_attributes(product)
       flash[:success] = "Product updated successfully."
       redirect_to action: "index"
-    #else
-    #  flash[:error] = "Please select a category."
-    #  render :action => "edit"
+    else
+      flash[:error] = "Please select a category."
+      render 'administration/edit', :product => @product
     end
+  end
+
+  def categories
+    Category.all
   end
 end
