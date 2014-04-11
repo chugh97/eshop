@@ -1,0 +1,8 @@
+<div class="row">
+  <h2>Manage your products</h2>
+  <ul>
+  <%@products.each do |p|%>
+   <li><%=p.name%> <%= link_to "Edit", edit_administration_product_path(p)%></li>
+  <%end%>
+  </ul>
+</div>

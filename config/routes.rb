@@ -31,9 +31,6 @@ Eshop::Application.routes.draw do
     end
   end
 
-
-
-  #resources :orders, :new => { :express => :get }
   get 'orders/express', to: 'orders#express'
   get 'orders/new', to: 'orders#new'
   post 'orders/completeorder' => 'orders#completeorder'
@@ -42,8 +39,15 @@ Eshop::Application.routes.draw do
     resources :products
   end
 
-  resources :products
+  namespace :administration do |admin|
+    resources :products
+  end
 
+  resources :products, :only => [:index]
+
+  #with_options(:namespace => "admin") do |admin|
+  #  admin.resources :products
+  #end
   # Example resource route with options:
   #   resources :products do
   #     member do

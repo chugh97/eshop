@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <%= form_for @product,:url => url_for(:controller => 'administration/products', :action => 'update') do |f| %>
+    <!--#<Product id: 1, name: "Radox", description: "Radox Men's shower gel", category_id: 1, created_at: "2014-04-09 13:19:56", updated_at: "2014-04-09 13:19:56">-->
+   <%= @product.inspect%><br />
+   <%=label_tag 'name', 'Name'%>: <%=text_field_tag 'name', @product.name%><br/>
+   <%=label_tag 'description', 'Description'%> :<%=text_field_tag 'description', @product.description%><br/>
+   <%=label_tag 'category', 'Category'%> : <%=select_tag "category", options_from_collection_for_select(@categories, "id", "name", @product.category_id), prompt: "Select category" %> <br/>
+  <%= submit_tag("Update Product", :class => 'btn btn-xs btn-success') %>
+  <%end%>
+</div>

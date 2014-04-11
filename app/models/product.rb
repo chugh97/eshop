@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   has_many :product_prices
   #has_many :orders
 
-  validates :category_id, :presence => true
+  validates :category, :presence => true
 
   def get_product_price
     product_prices.get_price()
